@@ -1,1 +1,21 @@
+function count_zeros(n: number): number {
+    let count = 0;
+    let divisor = 5;
+
+    while (n >= divisor) {
+        count += Math.floor(n / divisor);
+        divisor *= 5;
+    }
+
+    return count;
+}
+
+// Пример использования
+const N: number = 25; // Замените 25 на любое натуральное число
+if (N > 0) {
+    const result = count_zeros(N);
+    console.log(`Количество конечных нулей в ${N}! равно: ${result}`);
+} else {
+    console.log("Пожалуйста, введите натуральное число (больше 0).");
+}
 
