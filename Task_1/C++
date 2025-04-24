@@ -1,1 +1,24 @@
-
+#include <iostream> 
+using namespace std; 
+int count_zeros(int N) { 
+    int count = 0; 
+    // Пока N больше 0, продолжаем делить на 5  
+    while (N > 0) {                               
+        N /= 5; // Делим N на 5          
+        count += N; // Добавляем количество множителей 5    
+        }                                                  
+        return count;                                     
+}                                                  
+int main() {                                        
+    int N;                                           
+    cout << "Введите натуральное число N: ";           
+    cin >> N;
+    cout << "\n"; 
+    if (N < 0) {                                      
+        cout << "Пожалуйста, введите натуральное число." << std::endl;     
+        return 1;                                                        
+        }                                                             
+        int result = count_zeros(N);                                   
+        cout << "Количество конечных нулей в факториале числа " << N << " равно: " << result << std::endl;  
+        return 0;                                                                                     
+        }
