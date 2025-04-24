@@ -1,1 +1,23 @@
+fun count_zeros(N: Int): Int {
+    var count = 0
+    var tempN = N
+    // Пока tempN больше 0, продолжаем делить на 5
+    while (tempN > 0) {
+        tempN /= 5 // Делим tempN на 5
+        count += tempN // Добавляем количество множителей 5
+    }
+    return count
+}
 
+fun main() {
+    println("Введите натуральное число N: ")
+    val N = readLine()?.toIntOrNull()
+
+    if (N == null || N < 0) {
+        println("Пожалуйста, введите натуральное число.")
+        return
+    }
+
+    val result = count_zeros(N)
+    println("Количество конечных нулей в факториале числа $N равно: $result")
+}
