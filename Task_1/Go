@@ -1,1 +1,32 @@
+package main
+
+import (
+	"fmt"
+)
+
+func count_zeros(n int) int {
+	count := 0
+	divisor := 5
+
+	for n >= divisor {
+		count += n / divisor
+		divisor *= 5
+	}
+
+	return count
+}
+
+func main() {
+	var n int
+	fmt.Print("Введите натуральное число N: ")
+	_, err := fmt.Scanf("%d", &n)
+
+	if err != nil || n <= 0 {
+		fmt.Println("Пожалуйста, введите натуральное число.")
+		return
+	}
+
+	result := count_zeros(n)
+	fmt.Printf("Количество конечных нулей в факториале числа %d равно: %d\n", n, result)
+}
 
