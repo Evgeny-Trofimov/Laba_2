@@ -1,1 +1,35 @@
+using System;
 
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите натуральное число N: ");
+        string input = Console.ReadLine();
+        Console.Write("\n");
+        
+        if (int.TryParse(input, out int N) && N > 0)
+        {
+            int result = count_zeros(N);
+            Console.WriteLine($"Количество конечных нулей в {N}! равно: {result}");
+        }
+        else
+        {
+            Console.WriteLine("Пожалуйста, введите натуральное число (больше 0).");
+        }
+    }
+
+    static int count_zeros(int n)
+    {
+        int count = 0;
+        int divisor = 5;
+
+        while (n >= divisor)
+        {
+            count += n / divisor;
+            divisor *= 5;
+        }
+
+        return count;
+    }
+}
