@@ -1,1 +1,33 @@
+use std::io;
+
+fn count_zeros(n: u64) -> u64 {
+    let mut count = 0;
+    let mut divisor = 5;
+
+    while n >= divisor {
+        count += n / divisor;
+        divisor *= 5;
+    }
+
+    count
+}
+
+fn main() {
+    println!("Введите натуральное число N:");
+
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Ошибка чтения строки");
+    
+    // Проверка на натуральность числа
+    let n: u64 = match input.trim().parse() {
+        Ok(num) if num > 0 => num,
+        _ => {
+            println!("Пожалуйста, введите натуральное число.");
+            return;
+        }
+    };
+
+    let result = count_zeros(n);
+    println!("Количество конечных нулей в факториале числа {} равно: {}", n, result);
+}
 
