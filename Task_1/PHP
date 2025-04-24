@@ -1,1 +1,24 @@
+<?php
+function count_zeros($N) {
+    $count = 0;
+    // Пока N больше 0, продолжаем делить на 5
+    while ($N > 0) {
+        $N = intval($N / 5); // Делим N на 5 и округляем вниз
+        $count += $N; // Добавляем количество множителей 5
+    }
+    return $count;
+}
 
+function main() {
+    $N = intval(readline("Введите натуральное число N: "));
+
+    if ($N < 0) {
+        echo "Пожалуйста, введите натуральное число.\n";
+        return;
+    }
+
+    $result = count_zeros($N);
+    echo "Количество конечных нулей в факториале числа $N равно: $result\n";
+}
+main();
+?>
