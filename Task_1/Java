@@ -1,1 +1,37 @@
+import java.util.Scanner;
+
+public class FactorialTrailingZeros {
+    
+    public static int countTrailingZeros(int n) {
+        int count = 0;
+        int divisor = 5;
+
+        while (n >= divisor) {
+            count += n / divisor;
+            divisor *= 5;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите натуральное число N: ");
+
+        // Проверка ввода
+        if (scanner.hasNextInt()) {
+            int N = scanner.nextInt();
+            if (N > 0) {
+                int result = countTrailingZeros(N);
+                System.out.println("Количество конечных нулей в " + N + "! равно: " + result);
+            } else {
+                System.out.println("Пожалуйста, введите натуральное число (больше 0).");
+            }
+        } else {
+            System.out.println("Пожалуйста, введите корректное значение.");
+        }
+
+        scanner.close();
+    }
+} 
 
