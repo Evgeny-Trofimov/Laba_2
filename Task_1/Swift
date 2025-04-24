@@ -1,1 +1,23 @@
+import Foundation
+
+func count_zeros(n: Int) -> Int {
+    var count = 0
+    var divisor = 5
+
+    while n >= divisor {
+        count += n / divisor
+        divisor *= 5
+    }
+
+    return count
+}
+
+// Запрашиваем у пользователя ввод
+print("Введите натуральное число N:")
+if let input = readLine(), let N = Int(input), N > 0 {
+    let result = count_zeros(n: N)
+    print("Количество конечных нулей в факториале числа \(N) равно: \(result)")
+} else {
+    print("Пожалуйста, введите натуральное число (больше 0).")
+}
 
