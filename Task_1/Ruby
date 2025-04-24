@@ -1,1 +1,28 @@
+def count_zeros(n)
+  count = 0
+  divisor = 5
+
+  while n >= divisor
+    count += n / divisor
+    divisor *= 5
+  end
+
+  count
+end
+
+def main
+  print "Введите натуральное число N: "
+  n = gets.to_i
+  puts"\n"
+
+  if n <= 0
+    puts "Пожалуйста, введите натуральное число."
+    return
+  end
+
+  result = count_zeros(n)
+  puts "Количество конечных нулей в факториале числа #{n} равно: #{result}"
+end
+
+main 
 
