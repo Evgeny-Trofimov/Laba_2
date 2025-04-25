@@ -1,1 +1,28 @@
+use std::io;
+
+fn main() {
+    println!("Введите последовательность чисел (через пробел): ");
+    
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Не удалось прочитать строку");
+
+    // Преобразуем строку в вектор целых чисел
+    let numbers: Vec<i32> = input
+        .trim()
+        .split_whitespace()
+        .filter_map(|s| s.parse().ok())
+        .collect();
+
+    let mut count = 0;
+
+    // Проверяем, сколько чисел равны предыдущему
+    for i in 1..numbers.len() {
+        if numbers[i] == numbers[i - 1] {
+            count += 1; // Увеличиваем счетчик, если текущее число равно предыдущему
+        }
+    }
+
+    // Выводим результат
+    println!("Результат: {}", count);
+}
 
