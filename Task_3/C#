@@ -1,1 +1,31 @@
+using System;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите последовательность чисел (через пробел): ");
+        string input = Console.ReadLine(); // Считываем всю строку
+
+        // Преобразуем строку в массив целых чисел
+        int[] numbers = input.Split(' ')
+                             .Select(int.Parse)
+                             .ToArray();
+
+        int count = 0;
+
+        // Проверяем, сколько чисел равны предыдущему
+        for (int i = 1; i < numbers.Length; i++)
+        {
+            if (numbers[i] == numbers[i - 1])
+            {
+                count++; // Увеличиваем счетчик, если текущее число равно предыдущему
+            }
+        }
+
+        // Выводим результат
+        Console.WriteLine("Результат: " + count);
+    }
+}
 
