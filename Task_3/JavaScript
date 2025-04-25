@@ -1,1 +1,28 @@
+function countEqualAdjacentNumbers() {
+  const input = prompt("Введите последовательность чисел, разделенных пробелами:");
+
+  if (!input) {
+    console.log("Вы не ввели числа.");
+    return;
+  }
+
+  const numbers = input.split(" ").map(Number);
+
+  // Проверка, что все элементы массива - числа
+  if (numbers.some(isNaN)) {
+    console.log("Ошибка: Пожалуйста, введите только числа, разделенные пробелами.");
+    return;
+  }
+
+  let count = 0;
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] === numbers[i - 1]) {
+      count++;
+    }
+  }
+
+  console.log("Результат:", count);
+}
+
+countEqualAdjacentNumbers();
 
