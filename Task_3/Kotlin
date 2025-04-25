@@ -1,1 +1,20 @@
+fun main() {
+    println("Введите последовательность чисел (через пробел): ")
+    val input = readLine() ?: return // Считываем всю строку
+
+    // Преобразуем строку в список целых чисел
+    val numbers = input.split(" ").mapNotNull { it.toIntOrNull() }
+
+    var count = 0
+
+    // Проверяем, сколько чисел равны предыдущему
+    for (i in 1 until numbers.size) {
+        if (numbers[i] == numbers[i - 1]) {
+            count++ // Увеличиваем счетчик, если текущее число равно предыдущему
+        }
+    }
+
+    // Выводим результат
+    println("Результат: $count")
+}
 
