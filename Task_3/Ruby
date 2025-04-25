@@ -1,1 +1,31 @@
+def count_equal_adjacent
+  puts "Введите последовательность чисел, разделенных пробелами:"
+  input = gets.chomp
+  numbers_str = input.split(" ")
+
+  numbers = numbers_str.map do |num_str|
+    begin
+      Integer(num_str)
+    rescue ArgumentError
+      puts "Ошибка: '#{num_str}' не является целым числом. Оно будет проигнорировано."
+      nil # Заменяем некорректное значение на nil
+    end
+  end.compact # Удаляем все nil значения из массива
+
+  if numbers.length < 2
+    puts "Необходимо ввести как минимум два числа для сравнения."
+    return
+  end
+
+  count = 0
+  (1...numbers.length).each do |i|
+    if numbers[i] == numbers[i - 1]
+      count += 1
+    end
+  end
+
+  puts "Результат: #{count}"
+end
+
+count_equal_adjacent
 
