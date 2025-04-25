@@ -1,1 +1,62 @@
+section .data
+    msg db "Введите натуральное число N: ", 0
+    result_msg db "Количество конечных нулей в N!: %ld", 10, 0 ; форматная строка включает %ld
+    newline db 10, 0  ; Символ новой строки
+    format_string db "%ld", 0  ; Форматная строка для scanf (long int)
 
+section .bss
+    n resq 1         ; Хранит введенное число N (quadword)
+    count resq 1     ; Хранит количество конечных нулей (quadword)
+    temp resq 1      ; Временная переменная (quadword)
+    input_buffer resb 16 ; буфер для хранения введенной строки
+
+section .text
+    global _start
+
+extern printf
+extern scanf
+extern exit
+
+_start:
+    ; Вывод сообщения для ввода N
+    mov rdi, msg
+    xor eax, eax          ; printf requires AL to be 0 for variadic functions
+    call printf
+
+    ; Чтение N из ввода с использованием scanf
+    mov rdi, format_string ; Форматная строка
+    mov rsi, n          ; Адрес, куда scanf должен сохранить результат
+    xor eax, eax
+    call scanf
+
+    ; Подсчет количества конечных нулей
+    mov qword [count], 0  ; Инициализация счетчика нулей
+    mov qword [temp], 5    ; Инициализация делителя (5)
+
+loop_count:
+    mov rax, [n]          ; N -> RAX
+    cmp rax, [temp]       ; Сравниваем N с текущим делителем
+    jl end_loop          ; Если N < делителя, выходим из цикла
+
+    mov rbx, [temp]       ; делитель -> RBX
+    xor rdx, rdx          ; Очищаем RDX для деления
+    div rbx               ; RAX = N / делитель, RDX = остаток
+    add qword [count], rax  ; Добавляем результат деления к счетчику нулей
+
+    mov rax, [temp]       ; делитель -> RAX
+    mov rbx, 5            ; 5 -> RBX
+    mul rbx               ; RAX = делитель * 5
+    mov [temp], rax       ; Умножаем делитель на 5
+
+    jmp loop_count        ; Переходим к следующей итерации
+
+end_loop:
+    ; Вывод сообщения о результате
+    mov rdi, result_msg ; Форматная строка с %ld
+    mov rsi, [count]    ; Передаем количество нулей для печати
+    xor eax, eax ; нужно обнулять AL при вызове printf
+    call printf
+
+    ; Завершение программы
+    mov rdi, 0
+    call exit
