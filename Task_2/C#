@@ -1,1 +1,56 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите римское число: ");
+        string romanNumber = Console.ReadLine().ToUpper();
+
+        int result = RomanToInt(romanNumber);
+        Console.WriteLine($"Натуральное число: {result}");
+    }
+
+    static int RomanToInt(string s)
+    {
+        // Создаем словарь для значений римских цифр
+        Dictionary<char, int> romanValues = new Dictionary<char, int>
+        {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000}
+        };
+
+        int total = 0;
+        int prevValue = 0;
+
+        // Проходим по строке римского числа справа налево
+        for (int i = s.Length - 1; i >= 0; i--)
+        {
+            char currentChar = s[i];
+            int currentValue = romanValues[currentChar];
+
+            // Если текущее значение меньше предыдущего, вычитаем его
+            if (currentValue < prevValue)
+            {
+                total -= currentValue;
+            }
+            else
+            {
+                // Иначе добавляем значение
+                total += currentValue;
+            }
+
+            // Обновляем предыдущее значение
+            prevValue = currentValue;
+        }
+
+        return total;
+    }
+}
 
