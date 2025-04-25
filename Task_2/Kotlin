@@ -1,1 +1,43 @@
+fun romanToInt(s: String): Int {
+    // Создаем карту для значений римских цифр
+    val romanValues = mapOf(
+        'I' to 1,
+        'V' to 5,
+        'X' to 10,
+        'L' to 50,
+        'C' to 100,
+        'D' to 500,
+        'M' to 1000
+    )
+
+    var total = 0
+    var prevValue = 0
+
+    // Проходим по строке римского числа справа налево
+    for (i in s.length - 1 downTo 0) {
+        val currentChar = s[i]
+        val currentValue = romanValues[currentChar] ?: 0
+
+        // Если текущее значение меньше предыдущего, вычитаем его
+        if (currentValue < prevValue) {
+            total -= currentValue
+        } else {
+            // Иначе добавляем значение
+            total += currentValue
+        }
+
+        // Обновляем предыдущее значение
+        prevValue = currentValue
+    }
+
+    return total
+}
+
+fun main() {
+    println("Введите римское число: ")
+    val romanNumber = readLine() ?: ""
+
+    val result = romanToInt(romanNumber)
+    println("Натуральное число: $result")
+}
 
