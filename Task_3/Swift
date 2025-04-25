@@ -1,1 +1,40 @@
+import Foundation
+
+func countEqualAdjacentNumbers() -> Int {
+    print("Введите последовательность чисел, разделенных пробелами:")
+    
+    guard let input = readLine(), !input.isEmpty else {
+        print("Ошибка: Ввод пуст.")
+        return 0
+    }
+    
+    let numbersString = input.components(separatedBy: " ")
+    
+    // Фильтруем и преобразуем в массив Int
+    let numbers: [Int] = numbersString.compactMap {
+        if let num = Int($0) {
+            return num
+        } else {
+            print("Ошибка: Некорректное число. Оно будет проигнорировано.")
+            return nil
+        }
+    }
+    
+    guard numbers.count > 1 else {
+        print("Нужно ввести хотя бы 2 числа для сравнения.")
+        return 0
+    }
+    
+    var count = 0
+    for i in 1..<numbers.count {
+        if numbers[i] == numbers[i - 1] {
+            count += 1
+        }
+    }
+    
+    return count
+}
+
+let result = countEqualAdjacentNumbers()
+print("Результат: \(result)")
 
