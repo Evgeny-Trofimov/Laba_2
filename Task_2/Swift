@@ -1,1 +1,74 @@
+import Foundation
+
+func romanToInt(_ s: String) -> Int {
+    let romanMap: [Character: Int] = [
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    ]
+
+    var total = 0
+    var prevValue = 0
+
+    for char in s.reversed() {
+        guard let currentValue = romanMap[char] else {
+            continue // Игнорируем символы, которые не являются римскими
+        }
+
+        // Если текущее значение меньше предыдущего, вычитаем его, иначе добавляем
+        if currentValue < prevValue {
+            total -= currentValue
+        } else {
+            total += currentValue
+        }
+
+        // Обновляем предыдущее значение
+        prevValue = currentValue
+import Foundation
+
+func romanToInt(_ s: String) -> Int {
+    let romanMap: [Character: Int] = [
+        "I": 1,
+        "V": 5,
+        "X": 10,
+        "L": 50,
+        "C": 100,
+        "D": 500,
+        "M": 1000
+    ]
+
+    var total = 0
+    var prevValue = 0
+
+    for char in s.reversed() {
+        guard let currentValue = romanMap[char] else {
+            continue // Игнорируем символы, которые не являются римскими
+        }
+
+        // Если текущее значение меньше предыдущего, вычитаем его, иначе добавляем
+        if currentValue < prevValue {
+            total -= currentValue
+        } else {
+            total += currentValue
+        }
+
+        // Обновляем предыдущее значение
+        prevValue = currentValue
+    }
+
+    return total
+}
+
+// Ввод пользователя
+print("Введите римское число:")
+if let input = readLine() {
+    let result = romanToInt(input)
+    print("Натуральное число: \(result)")
+} else {
+    print("Ошибка ввода.")
+}
 
