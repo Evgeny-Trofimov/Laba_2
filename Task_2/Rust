@@ -1,1 +1,49 @@
+use std::collections::HashMap;
+use std::io;
+
+fn roman_to_int(s: &str) -> i32 {
+    // Создаем хэш-таблицу для значений римских цифр
+    let roman_values: HashMap<char, i32> = [
+        ('I', 1),
+        ('V', 5),
+        ('X', 10),
+        ('L', 50),
+        ('C', 100),
+        ('D', 500),
+        ('M', 1000),
+    ].iter().cloned().collect();
+
+    let mut total = 0;
+    let mut prev_value = 0;
+
+    // Проходим по строке римского числа справа налево
+    for c in s.chars().rev() {
+        let current_value = *roman_values.get(&c).unwrap();
+
+        // Если текущее значение меньше предыдущего, вычитаем его
+        if current_value < prev_value {
+            total -= current_value;
+        } else {
+            // Иначе добавляем значение
+            total += current_value;
+        }
+
+        // Обновляем предыдущее значение
+        prev_value = current_value;
+    }
+
+    total
+}
+
+fn main() {
+    // Запрашиваем ввод римского числа
+    println!("Введите римское число: ");
+    let mut roman_number = String::new();
+    io::stdin().read_line(&mut roman_number).expect("Не удалось прочитать строку");
+    let roman_number = roman_number.trim(); // Удаляем пробелы и символы новой строки
+
+    // Преобразуем и выводим результат
+    let result = roman_to_int(roman_number);
+    println!("Натуральное число: {}", result);
+}
 
