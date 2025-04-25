@@ -1,1 +1,39 @@
+#include <iostream>
+
+int main() {
+    int n;
+    std::cout << "Введите количество чисел: ";
+    std::cin >> n;
+
+    if (n <= 1) {
+        std::cout << "Результат: 0" << std::endl;
+        return 0;
+    }
+
+    // Создаем массив фиксированного размера (например, максимум 1000)
+    const int MAX_SIZE = 1000;
+    if (n > MAX_SIZE) {
+        std::cout << "Превышен допустимый размер массива." << std::endl;
+        return 1;
+    }
+
+    int sequence[MAX_SIZE];
+
+    std::cout << "\nВведите " << n << " чисел:" << std::endl;
+    for (int i = 0; i < n; ++i) {
+        std::cin >> sequence[i];
+    }
+
+    int count = 0;
+    // сравниваем каждый элемент с предыдущим
+    for (int i = 1; i < n; ++i) {
+        if (sequence[i] == sequence[i - 1]) {
+            ++count;
+        }
+    }
+
+    std::cout << "Результат: " << count << std::endl;
+
+    return 0;
+}
 
