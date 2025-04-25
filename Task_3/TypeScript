@@ -1,1 +1,20 @@
+function countEqualToPrevious(numbers: number[]): number {
+    let count = 0;
+
+    // Проверяем, сколько чисел равны предыдущему
+    for (let i = 1; i < numbers.length; i++) {
+        if (numbers[i] === numbers[i - 1]) {
+            count++; // Увеличиваем счетчик, если текущее число равно предыдущему
+        }
+    }
+
+    return count;
+}
+
+// Пример использования
+const input = "5 12 12 23 23 108";
+const numbers = input.split(" ").map(Number);
+
+const result = countEqualToPrevious(numbers);
+console.log(`Результат: ${result}`);
 
