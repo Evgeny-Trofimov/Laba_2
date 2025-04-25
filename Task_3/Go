@@ -1,1 +1,38 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func main() {
+	fmt.Println("Введите последовательность чисел (через пробел): ")
+
+	var input string
+	fmt.Scanln(&input)
+
+	// Преобразуем строку в срез целых чисел
+	numStrs := strings.Fields(input)
+	numbers := make([]int, len(numStrs))
+
+	for i, str := range numStrs {
+		num, err := strconv.Atoi(str)
+		if err == nil {
+			numbers[i] = num
+		}
+	}
+
+	count := 0
+
+	// Проверяем, сколько чисел равны предыдущему
+	for i := 1; i < len(numbers); i++ {
+		if numbers[i] == numbers[i-1] {
+			count++ // Увеличиваем счетчик, если текущее число равно предыдущему
+		}
+	}
+
+	// Выводим результат
+	fmt.Printf("Результат: %d\n", count)
+}
 
