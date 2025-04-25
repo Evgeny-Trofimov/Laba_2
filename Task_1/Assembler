@@ -8,7 +8,6 @@ section .bss
     n resq 1         ; Хранит введенное число N (quadword)
     count resq 1     ; Хранит количество конечных нулей (quadword)
     temp resq 1      ; Временная переменная (quadword)
-    input_buffer resb 16 ; буфер для хранения введенной строки
 
 section .text
     global _start
