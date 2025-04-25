@@ -1,1 +1,49 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+// Функция для преобразования римского числа в арабское
+func romanToInt(s string) int {
+	// Карта соответствий римских цифр и их значений
+	values := map[rune]int{
+		'I': 1,
+		'V': 5,
+		'X': 10,
+		'L': 50,
+		'C': 100,
+		'D': 500,
+		'M': 1000,
+	}
+
+	result := 0
+	s = strings.ToUpper(s) // приводим к верхнему регистру
+
+	for i := 0; i < len(s); i++ {
+		value := values[rune(s[i])]
+
+		// если следующий символ есть и его значение больше текущего,
+		// то вычитаем текущее значение, иначе добавляем
+		if i+1 < len(s) && values[rune(s[i+1])] > value {
+			result -= value
+		} else {
+			result += value
+		}
+	}
+	return result
+}
+
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Введите римское число: ")
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+
+	result := romanToInt(input)
+	fmt.Printf("Натуральное число: %d\n", result)
+}
 
